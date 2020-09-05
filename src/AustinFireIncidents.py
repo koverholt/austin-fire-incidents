@@ -2,7 +2,7 @@ import Algorithmia
 import numpy as np
 import pandas as pd
 
-client = Algorithmia.client("simSSc1M+5bDh1CtJ/qnBs0SBba1")
+client = Algorithmia.client()
 
 df = pd.concat(map(pd.read_csv, [
     client.file("data://koverholt/AustinFireIncidents/AFD_Fire_Incidents_2013_January_Thru_December.csv").getFile(),
