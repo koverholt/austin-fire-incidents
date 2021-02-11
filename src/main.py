@@ -1,8 +1,5 @@
-import Algorithmia
 import numpy as np
 import pandas as pd
-
-client = Algorithmia.client()
 
 df = pd.concat(map(pd.read_csv, [
     client.file("data://koverholt/AustinFireIncidents/AFD_Fire_Incidents_2013_January_Thru_December.csv").getFile(),
@@ -29,6 +26,30 @@ df = df.dropna(subset=["Latitude", "Longitude"])
 df["Latitude"] = df["Latitude"].astype(int) / 1000000
 df["Longitude"] = df["Longitude"].astype(int) / -1000000
 
+def apply(request):
+    """Responds to any HTTP request.
+    Args:
+        request (flask.Request): HTTP request object.
+    Returns:
+        The response text or any set of values that can be turned into a
+        Response object using
+        `make_response <http://flask.pocoo.org/docs/1.0/api/#flask.Flask.make_response>`.
+    """
 
-def apply(input):
-    return df.to_json(orient="records")
+    if request.method == 'OPTIONS':
+        headers = {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET',
+            'Access-Control-Allow-Headers': 'Content-Type',
+            'Access-Control-Max-Age': '3600'
+        }
+        return ('', 204, headers)
+
+    headers = {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST',
+        'Access-Control-Allow-Headers': 'Content-Type'
+    }
+
+    result = df.to_json(orient="records")
+    return (result, 200, headers)
