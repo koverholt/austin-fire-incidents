@@ -2,12 +2,12 @@ import numpy as np
 import pandas as pd
 
 df = pd.concat(map(pd.read_csv, [
-    client.file("data://koverholt/AustinFireIncidents/AFD_Fire_Incidents_2013_January_Thru_December.csv").getFile(),
-    client.file("data://koverholt/AustinFireIncidents/AFD_Fire_Incidents_2014_January_Thru_December.csv").getFile(),
-    client.file("data://koverholt/AustinFireIncidents/AFD_Fire_Incidents_2015_January_Thru_December.csv").getFile(),
-    client.file("data://koverholt/AustinFireIncidents/AFD_Fire_Incidents_2016_January_Thru_December.csv").getFile(),
-    client.file("data://koverholt/AustinFireIncidents/AFD_Fire_Incidents_2017_January_-_December.csv").getFile(),
-    client.file("data://koverholt/AustinFireIncidents/AFD_Fire_Incidents_2018_January_-_December.csv").getFile(),
+    "https://storage.googleapis.com/austin-fire-incidents/AFD_Fire_Incidents_2013_January_Thru_December.csv",
+    "https://storage.googleapis.com/austin-fire-incidents/AFD_Fire_Incidents_2014_January_Thru_December.csv",
+    "https://storage.googleapis.com/austin-fire-incidents/AFD_Fire_Incidents_2015_January_Thru_December.csv",
+    "https://storage.googleapis.com/austin-fire-incidents/AFD_Fire_Incidents_2016_January_Thru_December.csv",
+    "https://storage.googleapis.com/austin-fire-incidents/AFD_Fire_Incidents_2017_January_-_December.csv",
+    "https://storage.googleapis.com/austin-fire-incidents/AFD_Fire_Incidents_2018_January_-_December.csv",
 ]))
 
 df[["Latitude", "Longitude"]] = df["Location 1"].str.split(", ", expand=True)
