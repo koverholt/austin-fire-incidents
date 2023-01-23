@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+declare let Plotly: any;
 
 @Component({
   selector: 'app-root',
@@ -23,21 +24,21 @@ export class AppComponent {
       var obj = JSON.parse(this.response);
 
       function unpack(rows: any, key: any) {
-        return rows.map(function(row: any) { return row[key]; });
+        return rows.map(function (row: any) { return row[key]; });
       }
 
       var classArray = unpack(obj, 'Problem');
       var classes = [...new Set(classArray)];
 
-      var data = classes.map(function(classes) {
-        var rowsFiltered = obj.filter(function(row: any) {
-            return (row.Problem === classes);
+      var data = classes.map(function (classes) {
+        var rowsFiltered = obj.filter(function (row: any) {
+          return (row.Problem === classes);
         });
         return {
-            type: 'scattermapbox',
-            name: classes,
-            lat: unpack(rowsFiltered, 'Latitude'),
-            lon: unpack(rowsFiltered, 'Longitude'),
+          type: 'scattermapbox',
+          name: classes,
+          lat: unpack(rowsFiltered, 'Latitude'),
+          lon: unpack(rowsFiltered, 'Longitude'),
         };
       });
 
@@ -67,6 +68,5 @@ export class AppComponent {
       Plotly.newPlot('map', data, layout)
 
     };
-
   }
 }
