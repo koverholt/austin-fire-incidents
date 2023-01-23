@@ -1,0 +1,18 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #444;
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+
+  #text {
+    margin-top: 20px;
+  }
+
+  div.chart {
+    width: 90vw;
+    height: 80vh;
+    border: 3px solid #ddd;
+  }
