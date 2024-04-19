@@ -16,7 +16,7 @@ export class AppComponent {
 
   constructor() {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "https://us-central1-koverholt-apps-304316.cloudfunctions.net/austin-fire-incidents");
+    xhr.open("GET", "https://austin-fire-incidents-67ugd5bjtq-uc.a.run.app");
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send();
 
