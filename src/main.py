@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 
 df = pd.concat(map(pd.read_csv, [
@@ -38,7 +38,8 @@ df["Latitude"] = df["Latitude"].astype(int) / 1000000
 df["Longitude"] = df["Longitude"].astype(int) / -1000000
 
 
-@app.post("/")
-async def get_fire_incidents(request: Request):
+@app.get("/")
+def get_fire_incidents():
     result = df.to_json(orient="records")
+    result = Response(content=result, media_type="application/json")
     return result
